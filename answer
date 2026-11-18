@@ -1,0 +1,29 @@
+Code:
+
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> current;
+
+    void backtrack(int start, int n, int k) {
+        if (current.size() == k) {
+            result.push_back(current);
+            return;
+        }
+
+        for (int i = start; i <= n; i++) {
+            current.push_back(i);
+            backtrack(i + 1, n, k);
+            current.pop_back();
+        }
+    }
+
+    vector<vector<int>> combine(int n, int k) {
+        backtrack(1, n, k);
+        return result;
+    }
+};
+
+Explanation:
+
+We use backtracking to build combinations one number at a time. After choosing a number, we move to the next number to avoid duplicates. When the combination contains k numbers, we add it to the result.
